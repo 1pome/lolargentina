@@ -1,0 +1,125 @@
+---
+import DefaultLayout from '../../layouts/DefaultLayout.astro'
+import { Card, Pagination, Modal } from 'accessible-astro-components'
+
+import { formatBlogPosts } from "../../js/utils";
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = (await Astro.glob('./publicaciones/*.{md,mdx}')).sort(
+	(a, b) =>
+		new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
+);
+  const formattedPosts = formatBlogPosts(allPosts);
+
+  return paginate(formattedPosts, {
+    pageSize: 6,
+  });
+}
+
+
+const { page } = Astro.props
+---
+
+<DefaultLayout
+  title="Blog"
+  description="An example of a blog with dynamic content fetched from JSONPlaceholder using the title, body and userId."
+>
+  <section class="my-12">
+    <div class="space-content container">
+      <h1>Blog</h1>
+      <div class="space-content">
+        <button id="modal1-trigger" class="button">
+          Crear publicacion
+        </button>&nbsp;
+        <Modal triggerId="modal1-trigger" title="Crear publicacion">
+          <p>
+            Envia tu publicacion por correo a <strong>contacto@lolargentina.com.ar</strong> <br>
+            Revisa <a href="./publicaciones/Tutorial">esta publicacion</a> para ver un pequeño tutorial.
+          </p>
+        </Modal>
+      </div>
+    </div>
+  </section>
+  <section class="my-12">
+    <div class="container">
+      <!--<p class="text-sm"><em>Mostrando la pagina {page.start + 1} con {page.end + 1} publicaciones de {page.total} publicaciones</em></p>
+       <ul class="my-3">
+
+        {
+          page.data.map((post) => (
+            <li>
+              <Card
+                url={'/blog/' + post.title.replaceAll(' ', '-').toLowerCase()}
+                title={post.title}
+                footer={'userId:' + post.userId}
+              >
+                {post.body}
+              </Card>
+            </li>
+          ))
+        }
+      </ul> -->
+      <!-- <ul>
+        {posts.map((post) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+            
+            <time datetime={post.frontmatter.publishDate}>
+              {new Date(post.frontmatter.publishDate).toLocaleDateString('es-ar', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </time>
+          </li>
+        ))}
+
+      </ul> -->
+      <ul class="my-3">
+        {
+          page.data.map((post) => (
+            <li>
+              <Card
+                url={post.url}
+                title={post.frontmatter.title}
+                img = {post.frontmatter.img}
+                footer ={'Por: ' + post.frontmatter.userId}
+
+              >
+                {post.frontmatter.description}
+              </Card>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-12 grid place-content-center">
+        <Pagination
+          firstPage={page.url.prev ? '/blog' : null}
+          previousPage={page.url.prev ? page.url.prev : null}
+          nextPage={page.url.next ? page.url.next : null}
+          lastPage={page.url.next ? `/blog/${Math.round(page.total / page.size)}` : null}
+          currentPage={page.currentPage}
+          totalPages={Math.round(page.total / page.size)}
+        />
+      </div>
+            
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 4rem;
+
+    @media (min-width: 550px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 2rem;
+    }
+
+    @media (min-width: 950px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

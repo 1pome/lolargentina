@@ -1,0 +1,73 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import Hero from '../components/Hero.astro'
+import Feature from '../components/Feature.astro'
+import Counter from '../components/Counter.astro'
+import ContentMedia from '../components/ContentMedia.astro'
+const { src = '/acc.png' } = Astro.props
+const { src2 = '/acc2.png' } = Astro.props
+---
+
+<DefaultLayout title="Inicio">
+  <Hero />
+  
+  <section class="my-64">
+    <div class="container">
+      <h2 class="mb-16 text-6xl">¿Por qué nosotros? </h2>
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <!-- ICONOS https://icon-sets.iconify.design/mdi/headset/-->
+        <Feature icon="mdi:book-open-page-variant" title="Guias">
+          Subimos guias para mejorar tanto en League of Legends como en Teamfight Tactics.
+        </Feature>
+        <Feature icon="mdi:headset" title="Coaching">
+          Coaching gratuito semanalmente para mejorar tu macro y microgame.
+        </Feature>
+        <Feature icon="mdi:tournament" title="Torneos">
+          Demostra que tenes el mejor equipo en nuestros torneos semanales. 
+        </Feature>
+        <Feature icon="mdi:search" title="Buscador">
+          Busca tu nuevo team o tu nuevo duo para comenzar a subir de elo.
+        </Feature>
+        <Feature icon="mdi:newspaper-variant-multiple-outline" title="Notas y Noticias">
+          Te mantenemos al dia con las ultimas noticias y actualizaciones del juego.
+        </Feature>
+        <Feature icon="mdi:message-outline" title="Debates y Encuestas">
+          Encuestas, Debates, Concursos. Participa generando debates para hacer crecer la comunidad.
+        </Feature>
+        <!-- <Feature icon="mdi:theme-light-dark" title="Dark mode">
+          Fully integrated Dark mode gives your users the choice for their favorite viewing mode.
+        </Feature>
+        <Feature icon="mdi:cog" title="Design System">
+          The theme offers some very handy utilities to help you build your website faster.
+        </Feature>
+        <Feature icon="mdi:lighthouse" title="Lighthouse Scores">
+          Excellent lighthouse scores means your website will load faster and get better SEO rankings.
+        </Feature> -->
+      </div>
+    </div>
+  </section>
+  <ContentMedia imgSrc={src} decoding="async" >
+    <h2>Best And Fail Moments</h2>
+    <p class="text-2xl">
+      Subi tus jugadas mas epicas o divertidas a nuestro <b>#outplayed</b>, divertite mostrando tus mejores momentos y vamos a subirlo a nuestras redes!
+    </p>
+  </ContentMedia>
+  <ContentMedia imgSrc={src2} reverseImg={true} decoding="async" >
+    <h2>Estas listo para subir de elo?</h2>
+    <p class="text-2xl">
+      Subimos guias, consejos, actualizaciones y noticias relacionadas con el juego, para mejorar en todos los ambitos del juego.
+      Tambien podes publicar tus propios posteos y ayudar a hacer crecer esta comunidad. 
+    </p>
+  </ContentMedia>
+  <!-- <section class="mt-64 mb-32">
+    <div class="container">
+      <h2 class="mb-16 text-6xl">Counters</h2>
+      <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
+        <Counter count="17401" title="Miembros" sub="Totales" />
+        <Counter count="4081" title="Miembros" sub="Conectados" />
+        <Counter count="+15K" title="Mensajes" sub="Semanales" />
+        <Counter count="18+" title="Months" sub="Since launch" />
+      </div>
+    </div>
+  </section> -->
+</DefaultLayout>
