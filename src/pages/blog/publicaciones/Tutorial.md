@@ -54,7 +54,7 @@ CONTENIDO MARKDOWN O MDX
 Esto aplica tanto para **Markdown** como para **MDX**. Es el mismo proceso para los dos metodos.
 
 ## <u>A donde envio el archivo?</u>
-Este archivo .txt lo deberias enviar por correo a **contacto@lolargentina.com.ar**. 
+Este archivo .txt lo deberias enviar por correo a **contacto@lolargentina.online**. 
 O deberias ponerte en contacto con algun STAFF del <a href="https://discord.gg/nhn7FeBJ3h">servidor de discord</a>, comentandole tu idea o enviandole directamente la publicacion.
    
 ## <u>Consejos</u>
